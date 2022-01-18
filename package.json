@@ -1,0 +1,49 @@
+{
+  "name": "react18-d3js-swc",
+  "version": "1.0.0",
+  "description": "d3js project based on react18, swc",
+  "main": "index.js",
+  "author": "jkpark.dev@gmail.com",
+  "license": "MIT",
+  "keywords": [
+    "react18",
+    "swc",
+    "d3"
+  ],
+  "scripts": {
+    "start": "webpack-dev-server --open",
+    "build": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint \"./**/*.{ts,tsx,js,jsx}\" --ignore-path .eslintignore || true",
+    "lint:fix": "eslint --fix \"./**/*.{ts,tsx,js,jsx}\" --ignore-path .eslintignore || true",
+    "prettier": "prettier --write --config ./.prettierrc \"./src/**/*.{ts,tsx,js,jsx}\" || true"
+  },
+  "dependencies": {
+    "d3": "^7.3.0",
+    "react": "^18.0.0-rc.0",
+    "react-dom": "^18.0.0-rc.0"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.55",
+    "@swc/core": "^1.2.130",
+    "@types/d3": "^7.1.0",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
+    "eslint": "^8.7.0",
+    "eslint-config-airbnb-typescript": "^16.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "html-webpack-plugin": "^5.5.0",
+    "prettier": "^2.5.1",
+    "swc-loader": "^0.1.15",
+    "typescript": "^4.5.4",
+    "webpack": "^5.66.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.3"
+  }
+}
