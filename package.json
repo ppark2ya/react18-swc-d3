@@ -11,14 +11,15 @@
     "d3"
   ],
   "scripts": {
-    "start": "webpack-dev-server --open",
-    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode=development --open",
+    "build": "webpack --mode=production",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint \"./**/*.{ts,tsx,js,jsx}\" --ignore-path .eslintignore || true",
     "lint:fix": "eslint --fix \"./**/*.{ts,tsx,js,jsx}\" --ignore-path .eslintignore || true",
     "prettier": "prettier --write --config ./.prettierrc \"./src/**/*.{ts,tsx,js,jsx}\" || true"
   },
   "dependencies": {
+    "classnames": "^2.3.1",
     "d3": "^7.3.0",
     "react": "^18.0.0-rc.0",
     "react-dom": "^18.0.0-rc.0"
@@ -31,6 +32,9 @@
     "@types/react-dom": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^5.10.0",
+    "autoprefixer": "^10.4.2",
+    "css-loader": "^6.5.1",
+    "dart-sass": "^1.25.0",
     "eslint": "^8.7.0",
     "eslint-config-airbnb-typescript": "^16.1.0",
     "eslint-config-prettier": "^8.3.0",
@@ -39,11 +43,33 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.5.2",
+    "open-color": "^1.9.1",
+    "postcss": "^8.4.5",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-loader": "^6.2.1",
+    "postcss-preset-env": "^7.2.3",
     "prettier": "^2.5.1",
+    "sass": "^1.49.0",
+    "sass-loader": "^12.4.0",
+    "style-loader": "^3.3.1",
     "swc-loader": "^0.1.15",
+    "tailwindcss": "^3.0.15",
     "typescript": "^4.5.4",
     "webpack": "^5.66.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.7.3"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
