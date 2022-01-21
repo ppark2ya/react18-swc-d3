@@ -22,7 +22,8 @@
     "classnames": "^2.3.1",
     "d3": "^7.3.0",
     "react": "^18.0.0-rc.0",
-    "react-dom": "^18.0.0-rc.0"
+    "react-dom": "^18.0.0-rc.0",
+    "react-router-dom": "^6.2.1"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.55",

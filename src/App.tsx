@@ -1,11 +1,16 @@
 import React from 'react';
-import classes from './App.module.scss';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { EventListener, Intro, Svgs } from './Basics';
 
 function App() {
   return (
-    <div className={classes.app}>
-      <span className="m-5 text-blue-500 font-bold">text</span>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/intro" element={<Intro />} />
+        <Route path="/event-listener" element={<EventListener />} />
+        <Route path="/svgs" element={<Svgs />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
