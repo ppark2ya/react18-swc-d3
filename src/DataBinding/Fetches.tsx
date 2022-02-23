@@ -1,3 +1,7 @@
+/**
+ * @see https://observablehq.com/@d3/d3v6-migration-guide
+ * @desc d3 migration guide
+ */
 import React from 'react';
 import * as d3 from 'd3';
 
@@ -12,6 +16,7 @@ async function printJsonPlaceholders() {
   const data = await d3.json<Placeholder[]>(
     'https://jsonplaceholder.typicode.com/todos',
   );
+
   d3.select('#fetch-datas')
     .selectAll('.placeholders')
     .data(data)
@@ -71,11 +76,110 @@ function printScaleRect() {
     .attr('y', (d: number) => 100 - yScale(d));
 }
 
+type City = {
+  label: string;
+  population: string;
+  country: string;
+  x: string;
+  y: string;
+};
+
+async function printCitiesData() {
+  const cities = await d3.csv('/data/cities.csv');
+  const maxPopulation = d3.max(cities, (data: City) =>
+    parseInt(data.population),
+  );
+  const yScale = d3.scaleLinear([0, maxPopulation], [0, 460]);
+  const tooltip = d3
+    .select('body')
+    .append('div')
+    .attr('class', 'tooltip')
+    .style('opacity', 0);
+
+  d3.select('#cities')
+    .attr('style', 'width: 600px; height: 480px')
+    .append('g')
+    .selectAll('rect')
+    .data(cities)
+    .enter()
+    .append('rect')
+    .attr('width', 50)
+    .attr('height', (data: City) => yScale(parseInt(data.population)))
+    .attr('x', (_, index: number) => index * 55)
+    .attr('y', (data: City) => 480 - yScale(parseInt(data.population)))
+    .attr('fill', 'blue')
+    .attr('stroke', 'red')
+    .attr('stroke-width', '1px')
+    .attr('opacity', '0.5')
+    .on('mouseover', function (_, data: City) {
+      tooltip
+        .transition()
+        .duration(100)
+        .style('opacity', 1)
+        .text(`Population: ${parseInt(data.population)}`);
+    })
+    .on('mousemove', function (event: React.MouseEvent) {
+      tooltip
+        .style('top', `${event.clientY - 10}px`)
+        .style('left', `${event.clientX + 10}px`);
+    })
+    .on('mouseout', function () {
+      tooltip.transition().duration(100).style('opacity', 0);
+    });
+}
+
+type Tweet = {
+  content: string;
+  favorites: string[];
+  retweets: string[];
+  timestamp: string;
+  user: string;
+  numTweets?: number;
+};
+
+async function printTweetData() {
+  const { tweets } = await d3.json<{ tweets: Tweet[] }>('/data/tweets.json');
+
+  /**
+   * @see https://observablehq.com/@d3/d3v6-migration-guide#group
+   * @desc nest() -> group()
+   */
+  const nestedTweets = d3.group(tweets, (tweet) => tweet.user);
+  debugger;
+  console.log('nestedTweets: ', nestedTweets);
+
+  // const maxTweets = d3.max(nestedTweets, )
+  // for (const key of nestedTweets.keys()) {
+  //   console.log('nestedTweets.get(key): ', nestedTweets.get(key));
+  // }
+
+  // nestedTweets.forEach((tw) => {
+  //   tw.numTweets = tw.values.length;
+  // });
+  d3.select('#tweets')
+    .attr('style', 'width: 600px; height: 480px')
+    .append('g')
+    .selectAll('rect')
+    .data(nestedTweets)
+    .enter()
+    .append('rect')
+    .attr('width', 50)
+    .attr('height', 100)
+    .attr('x', (_, index: number) => index * 55)
+    .attr('y', 100)
+    .attr('fill', 'blue')
+    .attr('stroke', 'red')
+    .attr('stroke-width', '1px')
+    .attr('opacity', '0.5');
+}
+
 export function Fetches() {
   React.useEffect(() => {
     printJsonPlaceholders();
     printRect();
     printScaleRect();
+    printCitiesData();
+    printTweetData();
   }, []);
 
   return (
@@ -83,6 +187,8 @@ export function Fetches() {
       <div id="fetch-datas"></div>
       <svg id="rect" />
       <svg id="rect-scale" />
+      <svg id="cities" />
+      <svg id="tweets" />
     </div>
   );
 }

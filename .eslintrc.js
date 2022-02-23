@@ -42,6 +42,7 @@ module.exports = {
     ],
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
     '@typescript-eslint/naming-convention': 'off',
+    'no-debugger': 'off',
   },
   globals: {
     React: 'writable',
