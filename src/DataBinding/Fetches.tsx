@@ -142,31 +142,32 @@ async function printTweetData() {
 
   /**
    * @see https://observablehq.com/@d3/d3v6-migration-guide#group
-   * @desc nest() -> group()
+   * @see https://github.com/d3/d3-array/blob/main/README.md#rollup
+   * @see https://observablehq.com/@d3/d3-group
+   * @desc nest() -> rollup()
    */
-  const nestedTweets = d3.group(tweets, (tweet) => tweet.user);
-  debugger;
-  console.log('nestedTweets: ', nestedTweets);
+  const nestedTweets = d3.rollup(
+    tweets,
+    (value: Tweet[]) => ({
+      tweets: value,
+      numTweets: value.length,
+    }),
+    (tweet) => tweet.user,
+  );
+  const maxTweets = d3.max(nestedTweets, ([, tweet]) => tweet.numTweets);
+  const yScale = d3.scaleLinear([0, maxTweets], [0, 100]);
 
-  // const maxTweets = d3.max(nestedTweets, )
-  // for (const key of nestedTweets.keys()) {
-  //   console.log('nestedTweets.get(key): ', nestedTweets.get(key));
-  // }
-
-  // nestedTweets.forEach((tw) => {
-  //   tw.numTweets = tw.values.length;
-  // });
   d3.select('#tweets')
-    .attr('style', 'width: 600px; height: 480px')
+    .attr('style', 'width: 600px; height: 480px; margin-top: 20px')
     .append('g')
     .selectAll('rect')
     .data(nestedTweets)
     .enter()
     .append('rect')
     .attr('width', 50)
-    .attr('height', 100)
-    .attr('x', (_, index: number) => index * 55)
-    .attr('y', 100)
+    .attr('height', ([, tweet]) => yScale(tweet.numTweets))
+    .attr('x', (_, index: number) => index * 60)
+    .attr('y', ([, tweet]) => 100 - yScale(tweet.numTweets))
     .attr('fill', 'blue')
     .attr('stroke', 'red')
     .attr('stroke-width', '1px')

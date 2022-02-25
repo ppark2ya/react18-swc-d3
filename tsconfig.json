@@ -6,7 +6,7 @@
     "jsx": "preserve",
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": ["dom", "DOM.Iterable", "es2017"],
+    "lib": ["dom", "DOM.Iterable", "es2019"],
     "downlevelIteration": true,
     "paths": {
       "@/*": ["./src/*"]

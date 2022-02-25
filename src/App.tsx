@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { EventListener, Intro, Svgs } from './Basics';
-import { Column, Pie } from './Charts';
+import { Column, Pie, Dispersion } from './Charts';
 import { Fetches } from '@/DataBinding';
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
         <Route path="/column" element={<Column />} />
         <Route path="/pie" element={<Pie />} />
         <Route path="/fetches" element={<Fetches />} />
+        <Route path="/dispersion" element={<Dispersion />} />
       </Routes>
     </BrowserRouter>
   );
