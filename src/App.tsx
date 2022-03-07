@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { EventListener, Intro, Svgs } from './Basics';
 import { Column, Pie, Dispersion } from './Charts';
-import { Fetches } from '@/DataBinding';
+import { Fetches, SoccerViz } from '@/DataBinding';
 
 function App() {
   return (
@@ -15,6 +15,7 @@ function App() {
         <Route path="/pie" element={<Pie />} />
         <Route path="/fetches" element={<Fetches />} />
         <Route path="/dispersion" element={<Dispersion />} />
+        <Route path="/soccerviz" element={<SoccerViz />} />
       </Routes>
     </BrowserRouter>
   );
